@@ -71,9 +71,14 @@ def helped_protest():
 def recommend_lustration():
     responsibility = 0.5 * war_participation() + 0.5 * crimes_commited() * criminal_resource() - 0.3 * was_against() - 0.1 * helped_justice() - 0.1 * helped_protest()
     if 0 <= responsibility < 0.5:
-        print(ru.NOT_RECOMMENDED)
+        print(f'{ru.RESPONSIBILITY} {round(responsibility, 2)}. {ru.NOT_RECOMMENDED}')
     elif 0.5 <= responsibility:
-        print(ru.RECOMMENDED)
+        print(f'{ru.RESPONSIBILITY} {round(responsibility, 2)}. {ru.RECOMMENDED}')
+
+
+part_of_regime = input(ru.PART_OF_REGIME)
+beneficiary = input(ru.BENEFICIARY)
+criminal = input(ru.CRIMINAL)
 
 
 def main():
@@ -81,15 +86,11 @@ def main():
         case True:
             print(ru.MUST_BE_LUSTRATED)
         case False:
-            part_of_regime = input(ru.PART_OF_REGIME)
-            beneficiary = input(ru.BENEFICIARY)
-            criminal = input(ru.CRIMINAL)
-
-    match should_describe():
-        case False:
-            print(ru.NOT_CONNECTED)
-        case True:
-            recommend_lustration()
+            match should_describe():
+                case False:
+                    print(ru.NOT_CONNECTED)
+                case True:
+                    recommend_lustration()
 
 
 if __name__ == '__main__':
